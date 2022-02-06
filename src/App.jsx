@@ -1,13 +1,9 @@
-// import { Component } from 'react';
 import { useState, useEffect } from "react";
 import { nanoid } from 'nanoid';
-
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ConyactList';
 import Filter from './components/ContactsFilter/Filter';
-
 import { Container } from './App.styled';
-
 
 const startingContacts = [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -17,13 +13,22 @@ const startingContacts = [
 ];
    
 export default function App() {
-    
+    // const [contacts, setContacts] = useState(() => { return JSON.parse(localStorage.getItem('contacts')) ?? (startingContacts)})
     const [contacts, setContacts] = useState(startingContacts);
+    // const [contacts, setContacts] = useState([]);
     const [filter, setFilter] = useState("");
+
+    useEffect(() => {
+        if (localStorage.getItem('contacts')) {
+            const listOfContacts = JSON.parse(localStorage.getItem('contacts'));
+            setContacts(listOfContacts);
+        }
+    }, []);
 
     useEffect(() => {
         localStorage.setItem("contacts", JSON.stringify(contacts));
     }, [contacts]);
+
 
     const formSubmitHandler = (name, number) => {
         const normalizedContact = name.toLowerCase();
@@ -41,9 +46,8 @@ export default function App() {
             };
 
             setContacts([contact, ...contacts]);
-            
         }
-        console.log(contacts)
+        // console.log(contacts)
     };
 
     const deleteContact = (contactId) => {
@@ -59,7 +63,7 @@ export default function App() {
     const getVisibleContacts = () => {
         
         const normalizedFilter = filter.toLowerCase();
-        return contacts.filter((contact) =>
+        return contacts.filter(contact =>
             contact.name.toLowerCase().includes(normalizedFilter),
         );
     };

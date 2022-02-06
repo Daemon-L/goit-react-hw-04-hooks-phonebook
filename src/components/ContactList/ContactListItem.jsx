@@ -3,26 +3,15 @@ import PropTypes from 'prop-types';
 import { ContactItem, Button, Text } from './ContactList.styled'
 
 const ContactListItem = ({ contactsItem, onDeleteContact }) =>
-  contactsItem.map(contact => (
-    <ContactItem key={contact.id}>
-      <Text>{contact.name}: {contact.number}</Text>
-      <Button onClick={() => onDeleteContact(contact.id)}>
+  contactsItem.map(({ id, name, number }) => (
+    <ContactItem key={id}>
+      <Text>{name}: {number}</Text>
+      <Button onClick={() => onDeleteContact(id)}>
         Delete
       </Button>
     </ContactItem>
   )
 );
-
-//   const ContactListItem = ({ contactsItem, onDeleteContact }) =>
-//   contactsItem.map(({ id, name, number }) => (
-//     <ContactItem key={id}>
-//       <Text>{name}: {number}</Text>
-//       <Button onClick={() => onDeleteContact(id)}>
-//         Delete
-//       </Button>
-//     </ContactItem>
-//   )
-// );
 
 ContactListItem.propTypes = {
     contacts: PropTypes.arrayOf(
@@ -34,5 +23,4 @@ ContactListItem.propTypes = {
     ),
     onDeleteContact: PropTypes.func.isRequired,
 };
-
 export default ContactListItem;
