@@ -2,12 +2,14 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
 import { FormContainer, Text, Input, Button } from './Form.styled'
+// import { nanoid } from "nanoid";
 
 export default function ContactForm({onSubmit}) { 
-    const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [name, setName] = useState("");
+    const [number, setNumber] = useState("");
+    
    
-    const handleChange = evt => {
+    const handleChange = (evt) => {
         const formField = evt.currentTarget.name;
         if (formField === 'name') {
             setName(evt.currentTarget.value);
@@ -17,15 +19,15 @@ export default function ContactForm({onSubmit}) {
         }
     };
 
-    const handleSubmit = evt => {
+    const handleSubmit = (evt) => {
         evt.preventDefault();
         onSubmit(name, number);
         reset();
     };
 
     const reset = () => {
-        setName('');
-        setNumber('');
+        setName("");
+        setNumber("");
     };
 
         return (
@@ -35,6 +37,7 @@ export default function ContactForm({onSubmit}) {
                     <Input
                         type="text"
                         name="name"
+                        // id={nanoid()}
                         value={name}
                         onChange={handleChange}
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -82,6 +85,11 @@ ContactForm.propTypes = {
 //     reset = () => {
 //         this.setState({ name: '', number: '' });
 //     };
+
+//     static propTypes = {
+//         onSubmit: PropTypes.func.isRequired,
+//     };
+
 //     render() { 
 //         return (
 //             <FormContainer onSubmit={this.handleSubmit}>
