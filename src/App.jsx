@@ -29,7 +29,7 @@ export default function App() {
 
     const formSubmitHandler = (name, number) => {
         const normalizedContact = name.toLowerCase();
-        const isExist = contacts.find(c => c.name.toLowerCase() === normalizedContact)
+        const isExist = contacts.find(contact => contact.name.toLowerCase() === normalizedContact)
         if (isExist) {
             alert(`${name} is already in contacts`);
         } else {
@@ -135,7 +135,10 @@ export default function App() {
 //                 <ContactForm onSubmit={this.formSubmitHandler}/>
 //                 <h2>Contacts</h2>
 //                 <Filter value={filter} onChange={this.changeFilter}/>
-//                 <ContactList contacts={visibleContacts} onDeleteContact = {this.deleteContact} />
+//                 <ContactList
+//                     contacts={visibleContacts}
+//                     onDeleteContact={this.deleteContact}
+//                 />
 //             </Container>
 //         );
 //     }
