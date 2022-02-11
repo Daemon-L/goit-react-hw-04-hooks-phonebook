@@ -27,7 +27,7 @@ export default function App() {
         localStorage.setItem("contacts", JSON.stringify(contacts));
     }, [contacts]);
 
-    const formSubmitHandler = (name, number) => {
+    const formSubmitHandler = ({ name, number }) => {
         const normalizedContact = name.toLowerCase();
         const isExist = contacts.find(contact => contact.name.toLowerCase() === normalizedContact)
         if (isExist) {
@@ -62,7 +62,7 @@ export default function App() {
             <h2>Contacts</h2>
             <Filter value={filter} onChange={changeFilter}/>
             <ContactList
-                contacts={getVisibleContacts}
+                contacts={getVisibleContacts()}
                 onDeleteContact={deleteContact}
             />
         </Container>
